@@ -1,5 +1,6 @@
 /* Pokemones.jsx */
 import React, { useState, useEffect } from 'react';
+import { Card } from 'react-bootstrap';
 
 const getPokemonList = async () => {
   try {
@@ -31,22 +32,7 @@ const getPokemonData = async (pokemonName) => {
 };
 
 const Pokemones = ({ selectedPokemon }) => {
-  const [pokemonList, setPokemonList] = useState([]);
   const [pokemonData, setPokemonData] = useState(null);
-
-  useEffect(() => {
-    const fetchPokemonList = async () => {
-      try {
-        const list = await getPokemonList();
-        setPokemonList(list);
-      } catch (error) {
-        // Manejar errores
-        setPokemonList([]);
-      }
-    };
-
-    fetchPokemonList();
-  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,24 +51,24 @@ const Pokemones = ({ selectedPokemon }) => {
   }, [selectedPokemon]);
 
   return (
-    <div>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
       {pokemonData && (
-        <div>
-          <h2>{pokemonData.name}</h2>
-          <img
-            src={pokemonData.image}
-            alt={`${pokemonData.name} sprite`}
-            style={{ width: '200px', height: '200px' }}
-          />
-          <p>Estadísticas:</p>
-          <ul>
-            {pokemonData.stats.map((stat, index) => (
-              <li key={index}>
-                <strong>{stat.name}:</strong> {stat.base}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Card style={{ width: '18rem' }}>
+          <Card.Img variant="top" src={pokemonData.image} alt={`${pokemonData.name} sprite`} />
+          <Card.Body style={{ textAlign: 'center' }}>
+            <Card.Title>{pokemonData.name}</Card.Title>
+            <Card.Text>
+              <p>Estadísticas:</p>
+              <ul>
+                {pokemonData.stats.map((stat, index) => (
+                  <li key={index}>
+                    <strong>{stat.name}:</strong> {stat.base}
+                  </li>
+                ))}
+              </ul>
+            </Card.Text>
+          </Card.Body>
+        </Card>
       )}
     </div>
   );
