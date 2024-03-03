@@ -8,7 +8,7 @@ const getPokemonList = async () => {
     const data = await response.json();
     return data.results.map((pokemon) => pokemon.name);
   } catch (error) {
-    console.error('Error fetching Pokémon list:', error);
+    console.error('Error al obtener la lista:', error);
     throw error;
   }
 };
@@ -26,7 +26,7 @@ const getPokemonData = async (pokemonName) => {
       })),
     };
   } catch (error) {
-    console.error('Error fetching Pokémon data:', error);
+    console.error('Error al obtener los datos:', error);
     throw error;
   }
 };
@@ -51,12 +51,12 @@ const Pokemones = ({ selectedPokemon }) => {
   }, [selectedPokemon]);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       {pokemonData && (
         <Card style={{ width: '18rem' }}>
-          <Card.Img variant="top" src={pokemonData.image} alt={`${pokemonData.name} sprite`} />
+          <Card.Img variant="center" src={pokemonData.image} alt={`${pokemonData.name} sprite`} />
           <Card.Body style={{ textAlign: 'center' }}>
-            <Card.Title>{pokemonData.name}</Card.Title>
+            <Card.Title className="fs-1">{pokemonData.name}</Card.Title>
             <Card.Text>
               <p>Estadísticas:</p>
               <ul>

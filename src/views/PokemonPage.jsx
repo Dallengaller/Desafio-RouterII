@@ -41,7 +41,7 @@ const PokemonPage = () => {
             value={selectedPokemon}
             className="form-select mt-2"
           >
-            <option value="">-- Selecciona --</option>
+            <option value="">Pokemones</option>
             {pokemonList.map((pokemon) => (
               <option key={pokemon} value={pokemon}>
                 {pokemon}
